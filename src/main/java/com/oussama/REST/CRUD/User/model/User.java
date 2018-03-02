@@ -1,9 +1,13 @@
 package com.oussama.REST.CRUD.User.model;
 
 
+import org.hibernate.validator.constraints.Email;
+
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -11,14 +15,20 @@ import java.util.Date;
 
 public class User implements Serializable {
 
-// user(id, nom, prenom, age creation(createdAt), date modification)
+// user(id, nom, prenom, email, age, creation(createdAt), date modification)
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToMany
+    private Collection<Commande> commandes;
+
     @Column(name = "nom")
     private String nom;
+
+    @Column(name = "email")
+    private String email;
 
 
     @Column(name = "prenom")
@@ -45,7 +55,13 @@ public class User implements Serializable {
         this.modificationDate = modificationDate;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -87,9 +103,11 @@ public class User implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public Collection<Commande> getCommandes() {
+        return commandes;
+    }
 
-
-
-
-
+    public void setCommandes(Collection<Commande> commandes) {
+        this.commandes = commandes;
+    }
 }
