@@ -1,24 +1,17 @@
 package com.oussama.REST.CRUD.User.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "users")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"creationDate", "modificationDate"},
-        allowGetters = true)
+
 
 public class User implements Serializable {
 
-// user(id, nom, prenom, creation(createdAt), date de modification updatedAt)
+// user(id, nom, prenom, age creation(createdAt), date modification)
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,16 +24,28 @@ public class User implements Serializable {
     @Column(name = "prenom")
     private String prenom;
 
+    @Column(name = "age")
+    private Long age;
+
     @Column( updatable = false, name = "Date_Creation")
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+
     private Date creationDate;
 
-    @Column( name ="Date_Modification")
+    @Column( updatable = true, name = "Date_Modification")
     @Temporal(TemporalType.TIMESTAMP)
-    // le champ sera utilisé par le JPA
-    @LastModifiedDate
+
     private Date modificationDate;
+
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -66,6 +71,14 @@ public class User implements Serializable {
         this.prenom = prenom;
     }
 
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
@@ -74,12 +87,9 @@ public class User implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public Date getModificationDate() {
-        return modificationDate;
-    }
 
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
-    }
+
+
+
 
 }
