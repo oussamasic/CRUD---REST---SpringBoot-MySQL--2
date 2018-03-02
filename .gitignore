@@ -1,0 +1,10 @@
+# ignore all logs
+*.log
+# ignore all class
+*.class
+#ignore the target folder
+target/
+#ignore the application.properties file
+/src/main/resources/application.properties
+#ignore the test folder
+/src/test/
