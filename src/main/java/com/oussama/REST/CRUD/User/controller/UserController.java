@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -30,12 +34,15 @@ public class UserController {
     // Create a new user
     @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        user.setCreationDate(date);
         return userRepository.save(user);
         // return user;
     }
 
     // Get a Single user
-    @GetMapping("/userss/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long Id) {
         User user = userRepository.findOne(Id);
         if(user == null) {
@@ -65,8 +72,16 @@ public class UserController {
         if(u == null) {
             return ResponseEntity.notFound().build();
         }
+          // date de modification
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        userDetails.setModificationDate(date);
+
         u.setNom(userDetails.getNom());
         u.setPrenom(userDetails.getPrenom());
+        u.setAge(userDetails.getAge());
+        u.setModificationDate(userDetails.getModificationDate());
 
         User updatedUser = userRepository.save(u);
         return ResponseEntity.ok(updatedUser);
