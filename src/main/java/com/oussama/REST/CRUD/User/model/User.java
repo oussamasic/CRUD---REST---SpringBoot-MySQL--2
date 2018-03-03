@@ -2,11 +2,15 @@ package com.oussama.REST.CRUD.User.model;
 
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -25,12 +29,18 @@ public class User implements Serializable {
     private Collection<Commande> commandes;
 
     @Column(name = "nom")
+    @Size(min = 2, max =50)
+    @Pattern(regexp = "[A-Za-z. ]*", message = "First name requires valid character")
     private String nom;
 
+    @NotNull(message =  "Email requires valid value")
+    @NotEmpty(message = "Email requires non empty value")
+    @Email(message =    "Email requires valid format")
     @Column(name = "email")
     private String email;
 
-
+    @Size(min = 2, max =50)
+    @Pattern(regexp = "[A-Za-z. ]*", message = "First name requires valid character")
     @Column(name = "prenom")
     private String prenom;
 
