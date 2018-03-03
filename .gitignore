@@ -7,6 +7,19 @@
 #ignore the test folder
 /src/test/
 
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
 #ignore the target folder
 target/
