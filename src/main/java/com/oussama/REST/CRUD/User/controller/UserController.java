@@ -28,7 +28,7 @@ public class UserController {
 
     // Get All Users
     @GetMapping("/users")
-    public List<User> getAllNotes() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -119,7 +119,7 @@ public class UserController {
         u.setAge(userDetails.getAge());
         u.setModificationDate(userDetails.getModificationDate());
 
-        User updatedUser = userRepository.save(u);
+        userRepository.save(u);
         //return ResponseEntity.ok(updatedUser);
         return "User updated";
     }
