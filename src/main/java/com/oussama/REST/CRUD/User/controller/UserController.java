@@ -42,8 +42,9 @@ public class UserController {
 
         if(emailValidator.isValid( user.getEmail(),null)) {
 
-        userRepository.save(user);
-            return "User succesfully created with id = " + user.getId(); }
+    userRepository.save(user);
+     return "User succesfully created with id = " + user.getId(); }
+
 
         else {return "add a correct email adress"; }
         // return user;
@@ -100,7 +101,7 @@ public class UserController {
 
     // Update a user
     @PutMapping("/users/{id}")
-    public String updateNote(@PathVariable(value = "id") Long Id,
+    public String updateUser(@PathVariable(value = "id") Long Id,
                                            @Valid @RequestBody User userDetails) {
         User u = userRepository.findOne(Id);
         if(u == null) {
